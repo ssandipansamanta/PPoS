@@ -6,12 +6,15 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  height: 95vh;
+  height: 100vh;
   width: 100%;
+  overflow-x: hidden;
 }
 
 html {
-  box-sizing: border-box;height: 100vh;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 *, *:before, *:after {
@@ -21,8 +24,8 @@ html {
 .column {
   float: left;
   width: 50.0%;
-  margin-bottom: 16px;
-  padding: 0 8px;
+  margin-bottom: 8px;
+  padding: 0 4px;
 }
 
 .card {
@@ -31,14 +34,14 @@ html {
 }
 
 .about-section {
-  padding: 50px;
+  padding: 05px;
   text-align: center;
-  background-color: #474e5d;
+  background-color: #3C3B6E;
   color: white;
 }
 
 .container {
-  padding: 0 16px;
+  padding: 0 8px;
 }
 
 .container::after, .row::after {
@@ -51,23 +54,8 @@ html {
   color: grey;
 }
 
-.button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-}
 
-.button:hover {
-  background-color: #555;
-}
-
-@media screen and (max-width: 50px) {
+@media screen and (max-width: 8px) {
   .column {
     width: 100%;
     display: block;
@@ -78,20 +66,22 @@ html {
 <body>
 
 <div class="about-section">
-  <h1>About Us</h1>
-  <p>Passionate Statistician and Data Scientist</p>
-  <p>Blah Blah Blah</p>
+  <h3>About Us</h3>
+  <h5>Madan has solid background in biostatistics. He has supported late phase clinical trials, submission activities and communication with health agencies.<br> </br>
+		Sandipan has extensive knowledge of advanced statistical analysis, predictive modeling, forecasting, machine learning, and AI using various analytical tools in Big Data environments.</h5>
+		<br> </br>
+  <p>--- We’d love to hear from you. Send us a message and we’ll respond as soon as possible. --- </p>
 </div>
 
-<h2 style="text-align:center">Our Team</h2>
+<!--h2 style="text-align:center">Our Team</h2-->
 <div class="row">
   <div class="column">
     <div class="card">
       <img src="https://photo.bearsofficialsstore.com/16452001.jpg" alt="Madan" style="width:100%">
       <div class="container">
         <h2>Madan Gopal Kundu</h2>
-        <p class="title">Bio-Statistician</p>
-        <p>Blah Blah Blah.</p>
+        <p class="title">Associate Director Biostatistics</p>
+        <p>Daiichi Sankyo, Inc.; North Chicago, Illinois, United States</p>
         <p>mgkundu@gmail.com</p>
         <!--p><button class="button">Contact</button></p-->
       </div>
@@ -104,25 +94,12 @@ html {
       <div class="container">
         <h2>Sandipan Samanta</h2>
         <p class="title">Senior Data Scientist</p>
-        <p>Blah Blah Blah</p>
+        <p>QIAGEN GmbH; Dusseldorf, Germany</p>
         <p>sondiponsamanta@gmail.com</p>
         <!--p><button class="button">Contact</button></p-->
       </div>
     </div>
   </div>
-  
-  <!--div class="column">
-    <div class="card">
-      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Mickey_Mouse.png/220px-Mickey_Mouse.png" alt="Samiran" style="width:100%">
-      <div class="container">
-        <h2>Samiran Ghosh</h2>
-        <p class="title">Bio-Statistician</p>
-        <p>Blah Blah Blah</p>
-        <p>sghosh@example.com</p>
-        <p><button class="button">Contact</button></p>
-      </div>
-    </div>
-  </div-->
 </div>
 
 </body>

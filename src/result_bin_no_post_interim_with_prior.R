@@ -14,7 +14,7 @@ ppos_output_bin_no_post_interim_with_prior <- function(input){
                   stderr.ia=sqrt(input$binary_prop_one_sample*(1-input$binary_prop_one_sample)/input$binary_interim_sample_size), 
                   succ.crit="trial", 
                   Z.crit.final=input$binary_success_criteria_value,
-                  propdiff.prior=input$binary_prior_mean, 
+                  prop.prior=input$binary_prior_mean, 
                   sd.prior=sqrt(input$binary_prior_sd))
         }else{
           succ_ia(type="bin", 
@@ -27,7 +27,7 @@ ppos_output_bin_no_post_interim_with_prior <- function(input){
                   stderr.ia=sqrt(input$binary_prop_one_sample*(1-input$binary_prop_one_sample)/input$binary_interim_sample_size), 
                   succ.crit="trial", 
                   Z.crit.final=input$binary_success_criteria_value,
-                  propdiff.prior=input$binary_prior_mean, # Need to change with Beta(a,b)
+                  prop.prior=input$binary_prior_mean, # Need to change with Beta(a,b)
                   sd.prior=sqrt(input$binary_prior_sd))
         }         
       }else{
@@ -75,7 +75,7 @@ ppos_output_bin_no_post_interim_with_prior <- function(input){
                   stderr.ia=sqrt(input$binary_prop_one_sample*(1-input$binary_prop_one_sample)/input$binary_interim_sample_size), 
                   succ.crit="trial", 
                   alpha.final=input$binary_success_criteria_value,
-                  propdiff.prior=input$binary_prior_mean, 
+                  prop.prior=input$binary_prior_mean, 
                   sd.prior=sqrt(input$binary_prior_sd))
         }else{
           succ_ia(type="bin", 
@@ -88,7 +88,7 @@ ppos_output_bin_no_post_interim_with_prior <- function(input){
                   stderr.ia=sqrt(input$binary_prop_one_sample*(1-input$binary_prop_one_sample)/input$binary_interim_sample_size), 
                   succ.crit="trial", 
                   alpha.final=input$binary_success_criteria_value,
-                  propdiff.prior=input$binary_prior_mean,  # Need to change with Beta(a,b)
+                  prop.prior=input$binary_prior_mean,  # Need to change with Beta(a,b)
                   sd.prior=sqrt(input$binary_prior_sd))
         }
       }else{
@@ -136,7 +136,7 @@ ppos_output_bin_no_post_interim_with_prior <- function(input){
                 stderr.ia=sqrt(input$binary_prop_one_sample*(1-input$binary_prop_one_sample)/input$binary_interim_sample_size), 
                 succ.crit="clinical", 
                 clin.succ.threshold=input$binary_success_criteria_value_clinical,
-                propdiff.prior=input$binary_prior_mean, 
+                prop.prior=input$binary_prior_mean, 
                 sd.prior=sqrt(input$binary_prior_sd)) 
       }else{
         succ_ia(type="bin", 
@@ -149,7 +149,7 @@ ppos_output_bin_no_post_interim_with_prior <- function(input){
                 stderr.ia=sqrt(input$binary_prop_one_sample*(1-input$binary_prop_one_sample)/input$binary_interim_sample_size), 
                 succ.crit="clinical", 
                 clin.succ.threshold=input$binary_success_criteria_value_clinical,
-                propdiff.prior=input$binary_prior_mean,  # Need to change with Beta(a,b)
+                prop.prior=input$binary_prior_mean,  # Need to change with Beta(a,b)
                 sd.prior=sqrt(input$binary_prior_sd)) 
       }
              

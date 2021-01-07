@@ -1,4 +1,5 @@
 library(shiny)
+library(ggplot2)
 source("all_results.R")
 
 shinyServer(
@@ -31,6 +32,22 @@ shinyServer(
                                                                      paste0(ppos_output_cont()$result_ppos_interim_data,ppos_output_cont()$result_ppos_interim_with_prior))})
 
     
+    con_plot_data <- reactive(
+      if(input$continuous_prior_distribution_flag =='no'){
+        pps_plot_output_cont(input,ppos_output_cont()$mean_pred_wo_prior,ppos_output_cont()$sd_pred_wo_prior)
+      }else{
+        pps_plot_output_cont(input,ppos_output_cont()$mean_pred_wo_prior,ppos_output_cont()$sd_pred_wo_prior,
+                    ppos_output_cont()$mean_pred_w_prior,ppos_output_cont()$sd_pred_w_prior)
+      }
+    )
+    
+    output$cont_distribution <- renderPlot({
+      ggplot(data = con_plot_data(), aes(x = value, colour=type)) + 
+        geom_line(aes(y = Density), size = 1.5) +
+        xlab('value') +  ylab('Density')  + theme_classic() + theme(legend.position="bottom", legend.title = element_blank()) 
+        
+      })
+    
     ppos_output_bin <- reactive(
       if(input$binary_post_interim_trend_flag=='no'){
         if(input$binary_prior_distribution_flag =='no'){
@@ -55,6 +72,23 @@ shinyServer(
     output$bin_conditional_power_ppos_interim <- renderText({ifelse(input$binary_prior_distribution_flag =='no', 
                                                                     paste0(ppos_output_bin()$result_ppos_interim_data,"."),
                                                                     paste0(ppos_output_bin()$result_ppos_interim_data,ppos_output_bin()$result_ppos_interim_with_prior))})
+    
+    
+    bin_plot_data <- reactive(
+      if(input$binary_prior_distribution_flag =='no'){
+        pps_plot_output_bin(input,ppos_output_bin()$mean_pred_wo_prior,ppos_output_bin()$sd_pred_wo_prior)
+      }else{
+        pps_plot_output_bin(input,ppos_output_bin()$mean_pred_wo_prior,ppos_output_bin()$sd_pred_wo_prior,
+                        ppos_output_bin()$mean_pred_w_prior,ppos_output_bin()$sd_pred_w_prior)
+      }
+    )
+    
+    output$bin_distribution <- renderPlot({
+      ggplot(data = bin_plot_data(), aes(x = value, colour=type)) + 
+        geom_line(aes(y = Density), size = 1.5) +
+        xlab('value') +  ylab('Density')  + theme_classic() + theme(legend.position="bottom", legend.title = element_blank()) 
+      
+    })
     
     
     ppos_output_surv <- reactive(
@@ -82,24 +116,21 @@ shinyServer(
                                                                      paste0(ppos_output_surv()$result_ppos_interim_data,"."),
                                                                      paste0(ppos_output_surv()$result_ppos_interim_data,ppos_output_surv()$result_ppos_interim_with_prior))})
     
+    surv_plot_data <- reactive(
+      if(input$survival_prior_distribution_flag =='no'){
+        pps_plot_output_surv(input,ppos_output_surv()$mean_pred_wo_prior,ppos_output_surv()$sd_pred_wo_prior)
+      }else{
+        pps_plot_output_surv(input,ppos_output_surv()$mean_pred_wo_prior,ppos_output_surv()$sd_pred_wo_prior,
+                        ppos_output_surv()$mean_pred_w_prior,ppos_output_surv()$sd_pred_w_prior)
+      }
+    )
     
-  
-    # output$plot <- renderPlot({
-    #   # plot(cars, type=input$plotType)
-    #   cat(input$number_of_samples)
-    # })
-    # output$text <- renderText({paste("you have selected:",input$number_of_samples)})
-    # output$continuous_success_criteria_selection <- renderText({
-    #   if(input$continuous_success_criteria == "cont_trial_success"){
-    #     "Critical value at final analysis :"
-    #   } else{
-    #     "Clinically meaningful value  :"
-    #     }
-    #   
-    #   })
-    # output$continuous_verb <- renderText({paste("you have selected:",input$continuous_number_of_samples)})
-    # output$binary_verb <- renderText({paste("you have selected:",input$binary_number_of_samples)})
-    # output$survival_verb <- renderText({paste("you have selected:",input$survival_number_of_samples)})
+    output$surv_distribution <- renderPlot({
+      ggplot(data = surv_plot_data(), aes(x = value, colour=type)) + 
+        geom_line(aes(y = Density), size = 1.5) +
+        xlab('value') +  ylab('Density')  + theme_classic() + theme(legend.position="bottom", legend.title = element_blank()) 
+      
+    })
     
   
   

@@ -12,3 +12,5 @@ source("result_surv_no_post_interim.R")
 source("result_surv_no_post_interim_with_prior.R")
 source("result_surv_with_post_interim.R")
 source("result_surv_with_post_interim_with_prior.R")
+
+source("result_plot.R")

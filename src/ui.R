@@ -118,7 +118,7 @@ shinyUI(
                                       wellPanel(
                                         h4(id="cont_Summary", "Summary"),
                                         tags$style(HTML("#cont_Summary{color: blue;font-size: 20px;font-style: bold;text-align:center}")),
-                                        h5(id="cont_text", "Welcome to PPos: Free to use for One-Sample/Two Samples Continuous Endpoint")
+                                        includeHTML("../doc/continuous_summary.html")
                                       )
                               )
                              ),
@@ -138,7 +138,17 @@ shinyUI(
                                        div(textOutput("cont_conditional_power_ppos_interim"),style = "font-size:100%")
                                      )
                                     )     
-                              )
+                              ),
+                             fluidRow(
+                               column(12,
+                                      wellPanel(
+                                        h4(id="cont_dist_plot", "Predictive Distribution"),
+                                        tags$style(HTML("#cont_dist_plot{color: blue;font-size: 20px;font-style: bold;text-align:center}")),
+                                        h4(id="blank", " "),
+                                        plotOutput("cont_distribution")
+                                      )
+                               )
+                             ) 
                       )
                     )
            ),
@@ -285,7 +295,7 @@ shinyUI(
                                       wellPanel(
                                         h4(id="binary_Summary", "Summary"),
                                         tags$style(HTML("#binary_Summary{color: blue;font-size: 20px;font-style: bold;text-align:center}")),
-                                        h5(id="binary_text", "Welcome to PPos: Free to use for One-Sample/Two Samples Binary Endpoint")
+                                        includeHTML("../doc/binary_summary.html")
                                       )
                                )
                              ),
@@ -305,6 +315,16 @@ shinyUI(
                                         div(textOutput("bin_conditional_power_ppos_interim"),style = "font-size:100%")
                                       )
                                )     
+                             ),
+                             fluidRow(
+                               column(12,
+                                      wellPanel(
+                                        h4(id="bin_dist_plot", "Predictive Distribution"),
+                                        tags$style(HTML("#bin_dist_plot{color: blue;font-size: 20px;font-style: bold;text-align:center}")),
+                                        h5(" "),
+                                        plotOutput("bin_distribution")
+                                      )
+                               )
                              )
                       )
                     )
@@ -342,10 +362,10 @@ shinyUI(
                                  #              c("Normal"="normal", "Beta"="beta")
                                  fluidRow(
                                    column(5,
-                                          numericInput("survival_prior_mean", "HR(Prior)", value = 0, min = -Inf, max = Inf, width = "100px")
+                                          numericInput("survival_prior_mean", "Mean", value = 0, min = -Inf, max = Inf, width = "100px")
                                    ),
                                    column(5, ofset = 9,
-                                          numericInput("survival_prior_sd", "# Events", value = 1, min = 0.00001, max = Inf, width = "100px")
+                                          numericInput("survival_prior_sd", "Std Dev", value = 1, min = 0.00001, max = Inf, width = "100px")
                                    )
                                  )
                                )
@@ -406,7 +426,7 @@ shinyUI(
                                       wellPanel(
                                         h4(id="surv_Summary", "Summary"),
                                         tags$style(HTML("#surv_Summary{color: blue;font-size: 20px;font-style: bold;text-align:center}")),
-                                        h5(id="surv_text", "Welcome to PPos: Free to use for Two Samples Survival Endpoint")
+                                        includeHTML("../doc/survival_summary.html")
                                       )
                                )
                              ),
@@ -426,6 +446,15 @@ shinyUI(
                                         div(textOutput("surv_conditional_power_ppos_interim"),style = "font-size:100%")
                                       )
                                )     
+                             ),
+                             fluidRow(
+                               column(12,
+                                      wellPanel(
+                                        h4(id="surv_dist_plot", "Predictive Distribution"),
+                                        tags$style(HTML("#surv_dist_plot{color: blue;font-size: 20px;font-style: bold;text-align:center}")),
+                                        plotOutput("surv_distribution")
+                                      )
+                               )
                              )
                       )
                     )
@@ -449,18 +478,22 @@ shinyUI(
            tabPanel("Mathematical Derivation",
                     tags$iframe(style="height:800px; width:100%; scrolling=yes", src="https://arxiv.org/pdf/2006.15282.pdf")
            ),
-           tabPanel("Contact Us",
+           tabPanel("Contact",
                     fluidRow(
-                      column(1,
+                      column(2,
                              tags$small(
                                " "
                              )
                       ),
-                      column(10,
+                      column(8,
                              wellPanel(
                                includeHTML("../doc/about_us.html")
                                )
                              
+                      ),column(2,
+                               tags$small(
+                                 " "
+                               )
                       )
                   )
 

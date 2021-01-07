@@ -39,7 +39,8 @@ succ_ia <- function(type, nsamples, null.value=NULL, alternate="greater",
     }  
   }
   
-  
+  if(!is.null(hr.prior)){hr.prior=exp(hr.prior)}
+  if(!is.null(D.prior)){D.prior=4/D.prior^2}
   
   #--- Determine "r"
   r=ifelse(nsamples==1, 1, (a+1)/sqrt(a))
@@ -125,9 +126,7 @@ succ_ia <- function(type, nsamples, null.value=NULL, alternate="greater",
     if(!is.null(theta.exp)) theta.exp=-theta.exp
     if(!is.null(psi)) theta.prior=-theta.prior
   }
-  
-  
-  
+    
   #--- Determine "gamma"
   gamma=ifelse(succ.crit=="clinical", theta.min/k.ia, Z1.crit)
   
@@ -142,15 +141,28 @@ succ_ia <- function(type, nsamples, null.value=NULL, alternate="greater",
     output_sp_trend <- paste0(round(pnorm(quantile.cp), digits=3)) 
   }
   
-  output_ppos_interim_with_prior <- NULL
+  output_ppos_interim_with_prior <- mean.pred2 <- sd.pred2 <- NULL
   if(!is.null(psi)){ 
     quantile.ppos.prior= sqrt(t/(1-t))*(1/sqrt((1-psi)*t + psi))*((theta.est/k.ia)*(t*(1-psi)+psi) + (1-t)*(1-psi)*(theta.prior/k.ia) - gamma)
     # cat("psi=", psi, "\n")
-    output_ppos_interim_with_prior <- paste0(round(pnorm(quantile.ppos.prior), digits=3))}
+    output_ppos_interim_with_prior <- paste0(round(pnorm(quantile.ppos.prior), digits=3))
+	mean.pred2<- psi*theta.est + (1-psi)*theta.prior
+	sd.pred2<- k.ia^2*(1/(1-t) + psi/t)
+	}
+	
+	
+	mean.pred1<- theta.est
+	sd.pred1<- k.ia^2*(1/(1-t) + 1/t)
+	# x1 <- seq(mean.pred1-4*sd.pred1, mean.pred1+4*sd.pred1, length=100)
+	# hx1 <- dnorm(x1, mean=mean.pred1, sd=sd.pred1)
+	
+	
+	
   output <- list("result_interim_trend" = paste0("The CP is ",output_interim_trend," by expecting the interim trend in post interim"), 
                  "result_ppos_interim_data" = paste0("The PPoS is ", output_ppos_interim_data," based on interim data"), 
                  "result_sp_trend" = paste0(". It will be ", output_sp_trend, " with the specified trend in post interim."),
-                 "result_ppos_interim_with_prior" = paste0(". It will be ", output_ppos_interim_with_prior, " after incoroprating prior information to the interim data.")
+                 "result_ppos_interim_with_prior" = paste0(". It will be ", output_ppos_interim_with_prior, " after incoroprating prior information to the interim data."),
+				         "mean_pred_wo_prior"=mean.pred1,"mean_pred_w_prior"=mean.pred2,"sd_pred_wo_prior"=sd.pred1, "sd_pred_w_prior"=sd.pred2
                  )
   return(output)
   
