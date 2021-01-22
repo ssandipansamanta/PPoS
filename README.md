@@ -17,5 +17,5 @@ Clinical success and trial success both have been discussed. The discussion is l
 **Keywords**:
 B-value, Beta-Binomial, Binary endpoint, Conditional power, Continuous endpoint, Predictive power, Prior distribution, Probability of clinical success, Probability of trial success, Survival endpoint, Z test.
 
-## Shiny App Link: 
-[a link](https://ppos.herokuapp.com)
+## Web Link: 
+[PPOS Web Application](https://ppos.herokuapp.com)
